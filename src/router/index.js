@@ -2,7 +2,10 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import About from "../views/About.vue";
 
+// SysAdmin Component
 import SysAdminLogin from "../views/login/SysAdminLogin";
+import SysAdminLayout from "../views/layout/sysadmin/SysAdminLayout";
+import SysAdmins from "../components/sysadmin//sysadmins/Admin";
 
 Vue.use(VueRouter);
 
@@ -16,16 +19,42 @@ const routes = [
     path: "/sysadmin",
     name: "sysadminlogin",
     component: SysAdminLogin
+  },
+  {
+    path: "/sysadmin/main",
+    name: "sysadminlayout",
+    component: SysAdminLayout,
+    meta: {
+      level: 0,
+      text: "Sys Admin",
+      requiredAuth: true,
+      adminAuth: false,
+      sysadminAuth: true,
+      personnelAuth: false
+    },
+    children: [
+      {
+        path: "/sysadmin/admin",
+        component: SysAdmins,
+        name: "sys-admin-admins",
+        meta: {
+          text: "Admin",
+          level: 0,
+          requiredAuth: true,
+          adminAuth: false,
+          sysadminAuth: true,
+          personnelAuth: false
+        }
+      }
+    ]
+  },
+  {
+    // route level code-splitting
+    // this generates a separate chunk (404.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    path: "*",
+    component: () => import("../views/404.vue")
   }
-  // {
-  //   path: "/about",
-  //   name: "About",
-  // route level code-splitting
-  // this generates a separate chunk (about.[hash].js) for this route
-  // which is lazy-loaded when the route is visited.
-  //   component: () =>
-  //     import(/* webpackChunkName: "about" */ "../views/About.vue")
-  // }
 ];
 
 const router = new VueRouter({
