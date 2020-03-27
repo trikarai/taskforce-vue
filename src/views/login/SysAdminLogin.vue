@@ -88,8 +88,8 @@ export default {
       alert: false,
       e1: true,
       params: {
-        email: "",
-        password: ""
+        email: "sys_admin@email.org",
+        password: "password123"
       },
       activate: false
     };
@@ -119,8 +119,8 @@ export default {
 
           this.$router.replace("/sysadmin/main");
         })
-        .catch(res => {
-          bus.$emit("callNotif", "error", res);
+        .catch(error => {
+          bus.$emit("callNotif", "error", error);
         })
         .finally(() => {
           this.loader = false;
