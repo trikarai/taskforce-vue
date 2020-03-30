@@ -25,7 +25,7 @@
               </v-btn>
             </template>
             <template v-else>
-              <v-btn small color="warning">
+              <v-btn small color="warning" @click="openRemove(item.id, item.name, 'delete')">
                 <v-icon small>mdi-delete</v-icon>
               </v-btn>
             </template>
@@ -35,19 +35,32 @@
     </v-row>
 
     <dialog-admin :dialog.sync="dialog" @refresh="getDataList" />
+    <dialog-remove
+      :dialog.sync="dialogRemove"
+      :loading.sync="loadingData"
+      :dialogParams="dialogParams"
+      @confirm="confirmRemove"
+    />
   </v-container>
 </template>
 <script>
+import bus from "@/config/bus";
 import * as config from "@/config/config";
 import auth from "@/config/auth";
 
 import DialogAdmin from "./DialogAdmin";
-
+import DialogRemove from "@/components/DialogRemove";
 export default {
   data() {
     return {
       authData: "",
       dialog: false,
+      dialogRemove: false,
+      dialogParams: {
+        id: "",
+        action: "",
+        text: ""
+      },
       data: { total: 0, list: [] },
       loadingData: false,
       headers: [
@@ -57,7 +70,8 @@ export default {
     };
   },
   components: {
-    DialogAdmin
+    DialogAdmin,
+    DialogRemove
   },
   created: function() {
     this.authData = JSON.parse(auth.getAuthData());
@@ -83,6 +97,29 @@ export default {
     },
     openAdd() {
       this.dialog = true;
+    },
+    openRemove(id, text, action) {
+      this.dialogRemove = true;
+      this.dialogParams.id = id;
+      this.dialogParams.action = action;
+      this.dialogParams.text = text;
+    },
+    confirmRemove(id) {
+      this.loadingData = true;
+      this.axios
+        .delete(config.baseUri.api + "/sys-admin/sys-admins/" + id, {
+          headers: auth.getAuthHeader()
+        })
+        .then(res => {
+          this.dialogRemove = false;
+          this.getDataList();
+        })
+        .catch(error => {
+          bus.$emit("callNotif", "error", error);
+        })
+        .finally(() => {
+          this.loadingData = false;
+        });
     }
   }
 };
