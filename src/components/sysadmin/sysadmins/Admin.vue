@@ -20,9 +20,9 @@
         >
           <template v-slot:item.action="{item}">
             <template v-if="authData.data.id === item.id">
-              <v-btn class="ml-2" small color="primary" router to="/sysadmin/profile">
+              <!-- <v-btn class="ml-2" small color="primary" router to="/sysadmin/profile">
                 <v-icon small left>mdi-account-edit</v-icon>My Profile
-              </v-btn>
+              </v-btn> -->
             </template>
             <template v-else>
               <v-btn small color="warning" @click="openRemove(item.id, item.name, 'delete')">
