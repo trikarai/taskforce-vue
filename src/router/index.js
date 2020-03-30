@@ -5,7 +5,9 @@ import About from "../views/About.vue";
 // SysAdmin Component
 import SysAdminLogin from "../views/login/SysAdminLogin";
 import SysAdminLayout from "../views/layout/sysadmin/SysAdminLayout";
-import SysAdmins from "../components/sysadmin//sysadmins/Admin";
+import SysAdmins from "../components/sysadmin/sysadmins/Admin";
+import SysAccount from "../components/sysadmin/account/Account";
+import SysTenants from "../components/sysadmin/tenant/Tenants";
 
 Vue.use(VueRouter);
 
@@ -38,7 +40,33 @@ const routes = [
         component: SysAdmins,
         name: "sys-admin-admins",
         meta: {
-          text: "Admin",
+          text: "Admins Management",
+          level: 0,
+          requiredAuth: true,
+          adminAuth: false,
+          sysadminAuth: true,
+          personnelAuth: false
+        }
+      },
+      {
+        path: "/sysadmin/account",
+        component: SysAccount,
+        name: "sys-admin-account",
+        meta: {
+          text: "My Account",
+          level: 0,
+          requiredAuth: true,
+          adminAuth: false,
+          sysadminAuth: true,
+          personnelAuth: false
+        }
+      },
+      {
+        path: "/sysadmin/tenant",
+        component: SysTenants,
+        name: "sys-admin-tenant",
+        meta: {
+          text: "Tenants Management",
           level: 0,
           requiredAuth: true,
           adminAuth: false,
