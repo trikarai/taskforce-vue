@@ -4,7 +4,7 @@
     scrollable
     persistent
     :overlay="true"
-    max-width="300px"
+    max-width="350px"
     transition="dialog-transition"
   >
     <v-card :loading="loading">
