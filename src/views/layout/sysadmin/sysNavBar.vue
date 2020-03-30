@@ -117,12 +117,12 @@ export default {
           route: "/sysadmin/admin",
           disabled: false
         },
-        {
-          icon: "mdi-account-edit",
-          text: "Profile",
-          route: "/sysadmin/profile",
-          disabled: false
-        },
+        // {
+        //   icon: "mdi-account-edit",
+        //   text: "My Account",
+        //   route: "/sysadmin/account",
+        //   disabled: false
+        // },
         {
           icon: "mdi-office-building",
           text: "Tenant",
