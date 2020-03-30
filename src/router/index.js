@@ -9,6 +9,11 @@ import SysAdmins from "../components/sysadmin/sysadmins/Admin";
 import SysAccount from "../components/sysadmin/account/Account";
 import SysTenants from "../components/sysadmin/tenant/Tenants";
 
+// Tenant Login
+import TenantLogin from "../views/login/AdminTenantLogin";
+import TenantAdminLayout from "../views/layout/tenant/TenantAdminLayout";
+import TenantOrganization from "../components/tenant/organization/Organizations";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -21,6 +26,11 @@ const routes = [
     path: "/sysadmin",
     name: "sysadminlogin",
     component: SysAdminLogin
+  },
+  {
+    path: "/login",
+    name: "tenantlogin",
+    component: TenantLogin
   },
   {
     path: "/sysadmin/main",
@@ -77,6 +87,34 @@ const routes = [
     ]
   },
   {
+    path: "/tenant/main",
+    name: "tenant-admin-layout",
+    component: TenantAdminLayout,
+    meta: {
+      level: 0,
+      text: "Tenant",
+      requiredAuth: true,
+      adminAuth: true,
+      sysadminAuth: false,
+      personnelAuth: false
+    },
+    children: [
+      {
+        path: "/tenant/organization",
+        component: TenantOrganization,
+        name: "tenant-admin-organizations",
+        meta: {
+          text: "Organizations Management",
+          level: 0,
+          requiredAuth: true,
+          adminAuth: true,
+          sysadminAuth: false,
+          personnelAuth: false
+        }
+      }
+    ]
+  },
+  {
     // route level code-splitting
     // this generates a separate chunk (404.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -106,6 +144,13 @@ router.beforeEach((to, from, next) => {
         next();
       } else {
         next("/sysadmin/main");
+      }
+    } else if (to.meta.adminAuth) {
+      const authUser = JSON.parse(window.localStorage.getItem("lbUser"));
+      if (authUser.role === "ADMIN") {
+        next();
+      } else {
+        next("/tenant/main");
       }
     } else if (to.meta.personnelAuth) {
       const authUser = JSON.parse(window.localStorage.getItem("lbUser"));
