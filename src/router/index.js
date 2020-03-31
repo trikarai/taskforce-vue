@@ -13,6 +13,7 @@ import SysTenants from "../components/sysadmin/tenant/Tenants";
 import TenantLogin from "../views/login/AdminTenantLogin";
 import TenantAdminLayout from "../views/layout/tenant/TenantAdminLayout";
 import TenantOrganization from "../components/tenant/organization/Organizations";
+import TenantTerritory from "../components/tenant/territory/Territories";
 
 Vue.use(VueRouter);
 
@@ -105,6 +106,19 @@ const routes = [
         name: "tenant-admin-organizations",
         meta: {
           text: "Organizations Management",
+          level: 0,
+          requiredAuth: true,
+          adminAuth: true,
+          sysadminAuth: false,
+          personnelAuth: false
+        }
+      },
+      {
+        path: "/tenant/territory",
+        component: TenantTerritory,
+        name: "tenant-admin-territories",
+        meta: {
+          text: "Territories Management",
           level: 0,
           requiredAuth: true,
           adminAuth: true,
