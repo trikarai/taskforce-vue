@@ -6,7 +6,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col md="6" lg="6" xs="12">
+      <v-col md="8" lg="8" xs="12">
         <v-data-table
           :headers="headers"
           :items="data.list"
@@ -16,6 +16,12 @@
           :loading="loadingData"
         >
           <template v-slot:item.action="{item}">
+            <v-btn class="mr-2" small color="accent" @click="openAddBranch(item)">
+              <v-icon small left>mdi-leaf</v-icon>Add Branch
+            </v-btn>
+            <v-btn class="mr-2" small color="accent" @click="openEdit(item.id)">
+              <v-icon small>mdi-pencil</v-icon>
+            </v-btn>
             <v-btn small color="warning" @click="openRemove(item.id, item.name, 'delete')">
               <v-icon small>mdi-delete</v-icon>
             </v-btn>
@@ -29,7 +35,15 @@
       :dialogParams="dialogParams"
       @confirm="confirmRemove"
     />
-    <dialog-organization :dialog.sync="dialog" @refresh="getDataList" />
+    <dialog-organization
+      :parent="parentOrganization"
+      :isBranch="isBranch"
+      v-if="dialog"
+      :dialog.sync="dialog"
+      :isEdit="isEdit"
+      :editId="editId"
+      @refresh="getDataList"
+    />
   </v-container>
 </template>
 <script>
@@ -44,6 +58,10 @@ export default {
     return {
       authData: "",
       dialog: false,
+      parentOrganization: "",
+      isBranch: false,
+      isEdit: false,
+      editId: "",
       dialogRemove: false,
       dialogParams: {
         id: "",
@@ -83,6 +101,22 @@ export default {
     },
     openAdd() {
       this.dialog = true;
+      this.parentOrganization = {};
+      this.isBranch = false;
+      this.isEdit = false;
+    },
+    openAddBranch(item) {
+      this.dialog = true;
+      this.parentOrganization = item;
+      this.isBranch = true;
+      this.isEdit = false;
+    },
+    openEdit(item) {
+      this.dialog = true;
+      this.isBranch = false;
+      this.isEdit = true;
+      this.editId = item;
+      this.parentOrganization = {};
     },
     openRemove(id, text, action) {
       this.dialogRemove = true;

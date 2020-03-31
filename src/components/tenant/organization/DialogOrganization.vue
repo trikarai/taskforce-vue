@@ -15,6 +15,10 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-card-title>
+      <v-card-text v-if="isBranch">
+        <span class="subtitle">{{parent.name}}</span>
+      </v-card-text>
+      <!-- <v-card-text>{{isEdit}} {{parent}}</v-card-text> -->
       <v-card-text>
         <v-form v-model="valid" ref="form" lazy-validation>
           <v-text-field
@@ -32,7 +36,14 @@
             maxlength="250"
             required
           ></v-textarea>
-          <v-btn class="mr-2" color="primary" @click="submit" :disabled="!valid">submit</v-btn>
+          <v-btn
+            v-if="!isEdit"
+            class="mr-2"
+            color="primary"
+            @click="submit"
+            :disabled="!valid"
+          >Submit</v-btn>
+          <v-btn v-else class="mr-2" color="primary" @click="edit" :disabled="!valid">Update</v-btn>
           <v-btn @click="clear">clear</v-btn>
         </v-form>
       </v-card-text>
@@ -48,7 +59,20 @@ import * as config from "@/config/config";
 export default {
   mixins: [validationMixins],
   props: {
-    adminId: {
+    parent: {
+      type: Object,
+      required: false
+    },
+    isBranch: {
+      type: Boolean,
+      default: false,
+      required: true
+    },
+    isEdit: {
+      type: Boolean,
+      required: true
+    },
+    editId: {
       type: String,
       required: false
     },
@@ -63,24 +87,38 @@ export default {
       loading: false,
       params: {
         name: "",
-        code: "",
-        adminEmail: "",
-        adminPassword: "",
-        adminName: "",
-        adminPhone: ""
+        description: ""
       }
     };
+  },
+  watch: {},
+  mounted() {
+    if (this.isEdit) {
+      this.getDataDetail();
+    }
   },
   methods: {
     submit() {
       if (this.$refs.form.validate()) {
-        this.addAdmin();
+        switch (this.isBranch) {
+          case false:
+            this.addData();
+            break;
+          case true:
+            this.addDataBranch();
+            break;
+        }
+      }
+    },
+    edit() {
+      if (this.$refs.form.validate()) {
+        this.editData();
       }
     },
     clear() {
       this.$refs.form.reset();
     },
-    addAdmin() {
+    addData() {
       this.loading = true;
       this.axios
         .post(config.baseUri.api + "/admin/organizations", this.params, {
@@ -92,6 +130,60 @@ export default {
         .catch(error => {
           bus.$emit("callNotif", "error", error);
         })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
+    editData() {
+      this.loading = true;
+      this.axios
+        .patch(
+          config.baseUri.api + "/admin/organizations/" + this.editId,
+          this.params,
+          {
+            headers: auth.getAuthHeader()
+          }
+        )
+        .then(() => {
+          this.$emit("refresh");
+        })
+        .catch(error => {
+          bus.$emit("callNotif", "error", error);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
+    addDataBranch() {
+      this.loading = true;
+      this.axios
+        .post(
+          config.baseUri.api + "/admin/organizations/" + this.parent.id,
+          this.params,
+          {
+            headers: auth.getAuthHeader()
+          }
+        )
+        .then(() => {
+          this.$emit("refresh");
+        })
+        .catch(error => {
+          bus.$emit("callNotif", "error", error);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
+    getDataDetail() {
+      this.loading = true;
+      this.axios
+        .get(config.baseUri.api + "/admin/organizations/" + this.editId, {
+          headers: auth.getAuthHeader()
+        })
+        .then(res => {
+          this.params = res.data.data;
+        })
+        .catch(() => {})
         .finally(() => {
           this.loading = false;
         });
