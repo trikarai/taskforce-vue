@@ -108,7 +108,7 @@ export default {
         {
           icon: "mdi-view-dashboard",
           text: "Dashboard",
-          route: "/tenants/dashboard",
+          route: "/tenant/dashboard",
           disabled: true
         },
         {
@@ -120,19 +120,19 @@ export default {
         {
           icon: "mdi-map",
           text: "Territory",
-          route: "/tenants/territory",
+          route: "/tenant/territory",
           disabled: false
         },
         {
           icon: "mdi-account-key",
           text: "Personnel",
-          route: "/tenants/personnel",
+          route: "/tenant/personnel",
           disabled: false
         },
         {
           icon: "mdi-eye",
           text: "Assignment Form",
-          route: "/tenants/assignment-form",
+          route: "/tenant/assignment-form",
           disabled: false
         }
       ]
