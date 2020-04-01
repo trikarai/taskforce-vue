@@ -15,6 +15,12 @@ export const validationMixins = {
           return pattern.test(v) || "Number Only";
         }
       ],
+      rulesCoordinate: [
+        v => {
+          const pattern = /-?[0-9]{1,3}[.][0-9]+/;
+          return pattern.test(v) || "Coordinate Format false";
+        }
+      ],
       rulesYear: [
         v => !!v || "Year is required",
         v => {
