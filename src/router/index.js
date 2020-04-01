@@ -14,6 +14,8 @@ import TenantLogin from "../views/login/AdminTenantLogin";
 import TenantAdminLayout from "../views/layout/tenant/TenantAdminLayout";
 import TenantOrganization from "../components/tenant/organization/Organizations";
 import TenantTerritory from "../components/tenant/territory/Territories";
+import TenantTerritoryClient from "../components/tenant/territory/client/Client";
+import TenantTerritoryOrganizer from "../components/tenant/territory/organizer/Organizer";
 import TenantPersonnel from "../components/tenant/personnel/Personnel";
 
 Vue.use(VueRouter);
@@ -121,6 +123,32 @@ const routes = [
         meta: {
           text: "Territories Management",
           level: 0,
+          requiredAuth: true,
+          adminAuth: true,
+          sysadminAuth: false,
+          personnelAuth: false
+        }
+      },
+      {
+        path: "/tenant/territory/:territoryId/client",
+        component: TenantTerritoryClient,
+        name: "tenant-admin-territories-clients",
+        meta: {
+          text: "Clients Management",
+          level: 1,
+          requiredAuth: true,
+          adminAuth: true,
+          sysadminAuth: false,
+          personnelAuth: false
+        }
+      },
+      {
+        path: "/tenant/territory/:territoryId/organizer",
+        component: TenantTerritoryOrganizer,
+        name: "tenant-admin-territories-organizers",
+        meta: {
+          text: "Organizers Management",
+          level: 1,
           requiredAuth: true,
           adminAuth: true,
           sysadminAuth: false,
