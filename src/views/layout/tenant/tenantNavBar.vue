@@ -11,8 +11,8 @@
       </v-btn>
     </v-app-bar>
 
-    <v-btn icon v-if="$route.meta.level !== 0" @click="$router.go(-1) ">
-      <v-icon>arrow_back</v-icon>
+    <v-btn text class="mt-2" v-if="$route.meta.level !== 0" @click="$router.go(-1) ">
+      <v-icon left>mdi-arrow-left</v-icon> Back
     </v-btn>
     <!-- <p class="ml-3 mb-2">{{$route.name}}</p> -->
 
