@@ -14,6 +14,7 @@ import TenantLogin from "../views/login/AdminTenantLogin";
 import TenantAdminLayout from "../views/layout/tenant/TenantAdminLayout";
 import TenantOrganization from "../components/tenant/organization/Organizations";
 import TenantTerritory from "../components/tenant/territory/Territories";
+import TenantPersonnel from "../components/tenant/personnel/Personnel";
 
 Vue.use(VueRouter);
 
@@ -119,6 +120,19 @@ const routes = [
         name: "tenant-admin-territories",
         meta: {
           text: "Territories Management",
+          level: 0,
+          requiredAuth: true,
+          adminAuth: true,
+          sysadminAuth: false,
+          personnelAuth: false
+        }
+      },
+      {
+        path: "/tenant/personnel",
+        component: TenantPersonnel,
+        name: "tenant-admin-personnels",
+        meta: {
+          text: "Personnel Management",
           level: 0,
           requiredAuth: true,
           adminAuth: true,
