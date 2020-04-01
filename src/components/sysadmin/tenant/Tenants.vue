@@ -2,9 +2,7 @@
   <v-container extend grid-list-xs>
     <v-row>
       <v-col md="8" xs="12">
-        <v-btn color="primary" @click="openAdd">
-          <v-icon left>mdi-account-plus</v-icon>Add Admin
-        </v-btn>
+        <v-btn color="primary" @click="openAdd">Add Tenant</v-btn>
       </v-col>
     </v-row>
     <v-row>
@@ -12,9 +10,7 @@
         <v-data-table
           :headers="headers"
           :items="data.list"
-          hide-default-footer
           class="elevation-2"
-          pagination.sync="pagination"
           item-key="id"
           :loading="loadingData"
         >
@@ -22,7 +18,7 @@
             <v-btn small color="warning" @click="openRemove(item.id, item.name, 'delete')">
               <v-icon small>mdi-delete</v-icon>
             </v-btn>
-          </template> -->
+          </template>-->
         </v-data-table>
       </v-col>
     </v-row>
