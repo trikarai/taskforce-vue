@@ -11,7 +11,6 @@
         <v-data-table
           :headers="headers"
           :items="data.list"
-          hide-default-footer
           class="elevation-2"
           item-key="id"
           :loading="loadingData"
