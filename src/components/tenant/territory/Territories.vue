@@ -7,7 +7,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col md="8" lg="8" xs="12">
+      <v-col md="12" lg="12" xs="12">
         <v-data-table
           :headers="headers"
           :items="data.list"
@@ -15,6 +15,21 @@
           item-key="id"
           :loading="loadingData"
         >
+          <template v-slot:item.sub="{item}">
+            <v-btn
+              class="mr-2"
+              color="primary"
+              router
+              small
+              :to="{name: 'tenant-admin-territories-clients', params: { territoryId: item.id }}"
+            >Client</v-btn>
+            <v-btn
+              color="primary"
+              router
+              small
+              :to="{name: 'tenant-admin-territories-organizers', params: { territoryId: item.id }}"
+            >Organizer</v-btn>
+          </template>
           <template v-slot:item.action="{item}">
             <v-btn class="mr-2" small color="accent" @click="openAddBranch(item)">
               <v-icon small left>mdi-graph</v-icon>Add Branch
@@ -55,7 +70,6 @@ import DialogTerritory from "./DialogTerritory";
 export default {
   data() {
     return {
-      authData: "",
       dialog: false,
       parent: "",
       isBranch: false,
@@ -71,6 +85,7 @@ export default {
       loadingData: false,
       headers: [
         { text: "Name", value: "name", sortable: false },
+        { text: "", value: "sub", sortable: false, align: "left" },
         { text: "", value: "action", sortable: false, align: "right" }
       ]
     };
