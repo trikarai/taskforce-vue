@@ -13,6 +13,9 @@ import SysTenants from "../components/sysadmin/tenant/Tenants";
 import TenantLogin from "../views/login/AdminTenantLogin";
 import TenantAdminLayout from "../views/layout/tenant/TenantAdminLayout";
 import TenantOrganization from "../components/tenant/organization/Organizations";
+import TenantOrganizationFieldWorker from "../components/tenant/organization/fieldworker/FieldWorkers";
+import TenantOrganizationSupervisor from "../components/tenant/organization/supervisor/Supervisor";
+
 import TenantTerritory from "../components/tenant/territory/Territories";
 import TenantTerritoryClient from "../components/tenant/territory/client/Client";
 import TenantTerritoryOrganizer from "../components/tenant/territory/organizer/Organizer";
@@ -110,6 +113,32 @@ const routes = [
         meta: {
           text: "Organizations Management",
           level: 0,
+          requiredAuth: true,
+          adminAuth: true,
+          sysadminAuth: false,
+          personnelAuth: false
+        }
+      },
+      {
+        path: "/tenant/organization/:organizationId/fieldworker",
+        component: TenantOrganizationFieldWorker,
+        name: "tenant-admin-organizations-fieldworkers",
+        meta: {
+          text: "Field Workers Management",
+          level: 1,
+          requiredAuth: true,
+          adminAuth: true,
+          sysadminAuth: false,
+          personnelAuth: false
+        }
+      },
+      {
+        path: "/tenant/organization/:organizationId/supervisors",
+        component: TenantOrganizationSupervisor,
+        name: "tenant-admin-organizations-supervisors",
+        meta: {
+          text: "Supervisors Management",
+          level: 1,
           requiredAuth: true,
           adminAuth: true,
           sysadminAuth: false,

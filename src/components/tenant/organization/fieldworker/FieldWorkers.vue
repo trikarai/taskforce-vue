@@ -1,8 +1,8 @@
 <template>
-  <v-container extend grid-list-xs>
+  <v-container extended grid-list-xl>
     <v-row>
       <v-col md="8" xs="12">
-        <v-btn color="primary" @click="openAdd">Add Organization</v-btn>
+        <v-btn color="primary" @click="openAdd">Add Field Worker</v-btn>
       </v-col>
     </v-row>
     <v-row>
@@ -10,30 +10,13 @@
         <v-data-table
           :headers="headers"
           :items="data.list"
-          hide-default-footer
           class="elevation-2"
           item-key="id"
           :loading="loadingData"
         >
-          <template v-slot:item.sub="{item}">
-            <v-btn
-              class="mr-2"
-              color="primary"
-              router
-              small
-              :to="{name: 'tenant-admin-organizations-fieldworkers', params: { organizationId: item.id }}"
-            >Field Worker</v-btn>
-            <v-btn
-              class="mr-2"
-              color="primary"
-              router
-              small
-              :to="{name: 'tenant-admin-organizations-supervisors', params: { organizationId: item.id }}"
-            >Supervisor</v-btn>
-          </template>
           <template v-slot:item.action="{item}">
-            <v-btn class="mr-2" small color="accent" @click="openAddBranch(item)">
-              <v-icon small left>mdi-graph</v-icon>Add Branch
+            <v-btn class="mr-2" small color="accent" @click="openChange(item.id)">
+              <v-icon small>mdi-account-switch-outline</v-icon>
             </v-btn>
             <v-btn class="mr-2" small color="accent" @click="openEdit(item.id)">
               <v-icon small>mdi-pencil</v-icon>
@@ -51,11 +34,19 @@
       :dialogParams="dialogParams"
       @confirm="confirmRemove"
     />
-    <dialog-organization
-      :parent="parentOrganization"
-      :isBranch="isBranch"
+
+    <dialog-assign
       v-if="dialog"
+      :type="type"
       :dialog.sync="dialog"
+      :isEdit="isEdit"
+      :editId="editId"
+      @refresh="getDataList"
+    />
+    <dialog-change
+      v-if="dialogChange"
+      :type="type"
+      :dialog.sync="dialogChange"
       :isEdit="isEdit"
       :editId="editId"
       @refresh="getDataList"
@@ -66,15 +57,18 @@
 import bus from "@/config/bus";
 import * as config from "@/config/config";
 import auth from "@/config/auth";
+
 import DialogRemove from "@/components/DialogRemove";
-import DialogOrganization from "./DialogOrganization";
+import DialogAssign from "../DialogAssignPersonnel";
+import DialogChange from "../DialogChangePersonnel";
 
 export default {
   data() {
     return {
-      authData: "",
+      type: "fieldWorkers",
+      dialogChange: false,
       dialog: false,
-      parentOrganization: "",
+      parent: "",
       isBranch: false,
       isEdit: false,
       editId: "",
@@ -95,7 +89,8 @@ export default {
   },
   components: {
     DialogRemove,
-    DialogOrganization
+    DialogAssign,
+    DialogChange
   },
   mounted() {
     this.getDataList();
@@ -103,37 +98,41 @@ export default {
   methods: {
     getDataList() {
       this.dialog = false;
+      this.dialogChange = false;
       this.loadingData = true;
       this.axios
-        .get(config.baseUri.api + "/admin/organizations", {
-          headers: auth.getAuthHeader()
-        })
+        .get(
+          config.baseUri.api +
+            "/admin/organizations/" +
+            this.$route.params.organizationId +
+            "/fieldWorkers",
+          {
+            headers: auth.getAuthHeader()
+          }
+        )
         .then(res => {
           this.data = res.data.data;
         })
-        .catch(() => {})
+        .catch(error => {
+          bus.$emit("callNotif", "error", error);
+        })
         .finally(() => {
           this.loadingData = false;
         });
     },
     openAdd() {
       this.dialog = true;
-      this.parentOrganization = {};
-      this.isBranch = false;
-      this.isEdit = false;
-    },
-    openAddBranch(item) {
-      this.dialog = true;
-      this.parentOrganization = item;
-      this.isBranch = true;
       this.isEdit = false;
     },
     openEdit(item) {
       this.dialog = true;
-      this.isBranch = false;
       this.isEdit = true;
       this.editId = item;
-      this.parentOrganization = {};
+    },
+    openChange(item) {
+      this.dialogChange = true;
+      this.isEdit = true;
+      this.editId = item;
     },
     openRemove(id, text, action) {
       this.dialogRemove = true;
@@ -144,9 +143,16 @@ export default {
     confirmRemove(id) {
       this.loadingData = true;
       this.axios
-        .delete(config.baseUri.api + "/admin/organizations/" + id, {
-          headers: auth.getAuthHeader()
-        })
+        .delete(
+          config.baseUri.api +
+            "/admin/organizations/" +
+            this.$route.params.organizationId +
+            "/fieldWorkers/" +
+            id,
+          {
+            headers: auth.getAuthHeader()
+          }
+        )
         .then(res => {
           this.dialogRemove = false;
           this.getDataList();
@@ -161,5 +167,3 @@ export default {
   }
 };
 </script>
-<style scoped>
-</style>
