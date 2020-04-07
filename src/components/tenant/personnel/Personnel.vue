@@ -16,12 +16,6 @@
           :loading="loadingData"
         >
           <template v-slot:item.action="{item}">
-            <!-- <v-btn class="mr-2" small color="accent" @click="openAddBranch(item)">
-              <v-icon small left>mdi-graph</v-icon>Add Branch
-            </v-btn>
-            <v-btn class="mr-2" small color="accent" @click="openEdit(item.id)">
-              <v-icon small>mdi-pencil</v-icon>
-            </v-btn> -->
             <v-btn small color="warning" @click="openRemove(item.id, item.name, 'delete')">
               <v-icon small>mdi-delete</v-icon>
             </v-btn>
