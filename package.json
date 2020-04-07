@@ -13,6 +13,7 @@
     "@rj-pkgs/vue-the-mask": "^0.12.5",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "lodash": "^4.17.15",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.11",
     "vue-axios": "^2.1.5",
