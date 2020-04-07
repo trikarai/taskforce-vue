@@ -104,9 +104,9 @@ export default {
       alert: false,
       e1: true,
       params: {
-        tenantCode: "tenant-0-code",
-        email: "admin@email.org",
-        password: "password123"
+        tenantCode: "",
+        email: "",
+        password: ""
       },
       activate: false
     };
