@@ -112,7 +112,7 @@ export default {
           disabled: true
         },
         {
-          icon: "mdi-layers",
+          icon: "mdi-sitemap",
           text: "Organization",
           route: "/tenant/organization",
           disabled: false
@@ -124,13 +124,13 @@ export default {
           disabled: false
         },
         {
-          icon: "mdi-account-key",
+          icon: "mdi-account",
           text: "Personnel",
           route: "/tenant/personnel",
           disabled: false
         },
         {
-          icon: "mdi-eye",
+          icon: "mdi-ballot-outline",
           text: "Assignment Form",
           route: "/tenant/assignment-form",
           disabled: false
