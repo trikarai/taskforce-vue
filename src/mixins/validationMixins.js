@@ -99,7 +99,7 @@ export const validationMixins = {
   computed: {},
   methods: {
     checkRequired(value) {
-      if (value.length === 0 && this.field.required) {
+      if (value.length === 0 && this.field.mandatory) {
         return "Field is Required!";
       } else {
         return true;
