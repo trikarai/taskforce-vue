@@ -5,9 +5,26 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    isLoggedIn: false
+    isLoggedIn: false,
+    organizationId: "",
+    targetType: "canvass"
   },
-  mutations: {},
+  getters: {
+    getOrganizationId: state => {
+      return state.organizationId;
+    },
+    getTargetType: state => {
+      return state.targetType;
+    }
+  },
+  mutations: {
+    setOrganizationId: (state, payload) => {
+      state.organizationId = payload;
+    },
+    setTargetType: (state, payload) => {
+      state.targetType = payload;
+    }
+  },
   actions: {},
   modules: {}
 });
