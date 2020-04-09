@@ -21,6 +21,19 @@ import TenantTerritoryClient from "../components/tenant/territory/client/Client"
 import TenantTerritoryOrganizer from "../components/tenant/territory/organizer/Organizer";
 import TenantPersonnel from "../components/tenant/personnel/Personnel";
 
+import TenantAssignmentForm from "../components/tenant/form/AssignmentForms";
+import TenantAssignmentFormBuild from "../components/tenant/form/buildAssignmentForm";
+import TenantAssignmentFormPreview from "../components/formModule/builder/formPreview";
+
+// Personnel Login
+import PersonnelLogin from "../views/login/PersonnelLogin";
+import PersonnelLayout from "../views/layout/personnel/PersonnelLayout";
+import PersonnelSupervisorAssigmentPlans from "../components/personnel/asSupervisor/AssignmentPlans";
+import PersonnelSupervisorAssigmentPlanCreate from "../components/personnel/asSupervisor/createAssignmentPlan";
+import PersonnelSupervisorAssigmentPlanCanvassers from "../components/personnel/asSupervisor/canvasser/Canvassers";
+import PersonnelSupervisorAssigmentPlanCanvasserTargets from "../components/personnel/asSupervisor/canvasser/target/Target";
+import PersonnelSupervisorAssigmentPlanCanvasserTargetAssignments from "../components/personnel/asSupervisor/canvasser/target/assignment/Assignments";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -35,9 +48,14 @@ const routes = [
     component: SysAdminLogin
   },
   {
-    path: "/login",
+    path: "/tenant",
     name: "tenantlogin",
     component: TenantLogin
+  },
+  {
+    path: "/login",
+    name: "personnellogin",
+    component: PersonnelLogin
   },
   {
     path: "/sysadmin/main",
@@ -196,6 +214,168 @@ const routes = [
           sysadminAuth: false,
           personnelAuth: false
         }
+      },
+      {
+        path: "/tenant/assignment-form",
+        component: TenantAssignmentForm,
+        name: "tenant-admin-forms",
+        meta: {
+          text: "Assignment Forms Management",
+          level: 0,
+          requiredAuth: true,
+          adminAuth: true,
+          sysadminAuth: false,
+          personnelAuth: false
+        }
+      },
+      {
+        path: "/tenant/assignment-form/build",
+        component: TenantAssignmentFormBuild,
+        name: "tenant-admin-forms-build",
+        meta: {
+          text: "Create Assignment Form",
+          level: 1,
+          requiredAuth: true,
+          adminAuth: true,
+          sysadminAuth: false,
+          personnelAuth: false
+        }
+      },
+      {
+        path: "/tenant/assignment-form/:formId/edit",
+        component: TenantAssignmentFormBuild,
+        name: "tenant-admin-forms-edit",
+        meta: {
+          text: "Edit Assignment Form",
+          level: 1,
+          requiredAuth: true,
+          adminAuth: true,
+          sysadminAuth: false,
+          personnelAuth: false
+        }
+      },
+      {
+        path: "/tenant/assignment-form/view/:formId",
+        component: TenantAssignmentFormPreview,
+        name: "tenant-admin-forms-preview",
+        meta: {
+          text: "Assignment Form Preview",
+          level: 1,
+          requiredAuth: true,
+          adminAuth: true,
+          sysadminAuth: false,
+          personnelAuth: false
+        }
+      }
+    ]
+  },
+  {
+    path: "/personnel/main",
+    name: "personnellayout",
+    component: PersonnelLayout,
+    meta: {
+      level: 0,
+      text: "Personnel",
+      requiredAuth: true,
+      adminAuth: false,
+      sysadminAuth: false,
+      personnelAuth: true
+    },
+    children: [
+      {
+        path: "/personnel/supervisor/assignment-plan",
+        component: PersonnelSupervisorAssigmentPlans,
+        name: "personnel-spv-assignmentplans",
+        meta: {
+          text: "Assignment Plans",
+          level: 1,
+          requiredAuth: true,
+          adminAuth: false,
+          sysadminAuth: false,
+          personnelAuth: true
+        }
+      },
+      {
+        path: "/personnel/supervisor/assignment-plan/create",
+        component: PersonnelSupervisorAssigmentPlanCreate,
+        name: "personnel-spv-assignmentplans-create",
+        meta: {
+          text: "Create Assignment Plans",
+          level: 2,
+          requiredAuth: true,
+          adminAuth: false,
+          sysadminAuth: false,
+          personnelAuth: true
+        }
+      },
+      {
+        path: "/personnel/supervisor/assignment-plan/:planId/canvasser",
+        component: PersonnelSupervisorAssigmentPlanCanvassers,
+        name: "personnel-spv-assignmentplans-canvassers",
+        meta: {
+          text: "Assignment Plan's Canvassers ",
+          level: 3,
+          requiredAuth: true,
+          adminAuth: false,
+          sysadminAuth: false,
+          personnelAuth: true
+        }
+      },
+      {
+        path:
+          "/personnel/supervisor/assignment-plan/:planId/canvasser/:canvasserId/canvass-target",
+        component: PersonnelSupervisorAssigmentPlanCanvasserTargets,
+        name: "personnel-spv-assignmentplans-canvasstarget",
+        meta: {
+          text: "Canvasser's Canvas Target ",
+          level: 4,
+          requiredAuth: true,
+          adminAuth: false,
+          sysadminAuth: false,
+          personnelAuth: true
+        }
+      },
+      {
+        path:
+          "/personnel/supervisor/assignment-plan/:planId/canvasser/:canvasserId/survey-target",
+        component: PersonnelSupervisorAssigmentPlanCanvasserTargets,
+        name: "personnel-spv-assignmentplans-surveytarget",
+        meta: {
+          text: "Canvasser's Survey Target ",
+          level: 4,
+          requiredAuth: true,
+          adminAuth: false,
+          sysadminAuth: false,
+          personnelAuth: true
+        }
+      },
+      {
+        path:
+          "/personnel/supervisor/assignment-plan/:planId/canvasser/:canvasserId/survey-target/:targetId/assigment",
+        component: PersonnelSupervisorAssigmentPlanCanvasserTargetAssignments,
+        name: "personnel-spv-assignmentplans-surveytarget-assignments",
+        meta: {
+          text: "Canvasser's Survey Target Assignments",
+          level: 5,
+          requiredAuth: true,
+          adminAuth: false,
+          sysadminAuth: false,
+          personnelAuth: true
+        }
+      },
+      {
+        path:
+          "/personnel/supervisor/assignment-plan/:planId/canvasser/:canvasserId/canvass-target/:targetId/assigment",
+        component: PersonnelSupervisorAssigmentPlanCanvasserTargetAssignments,
+        name: "personnel-spv-assignmentplans-canvasstarget-assignments",
+        meta: {
+          text: "Canvasser's Canvass Target Assignments",
+          level: 5,
+          requiredAuth: true,
+          adminAuth: false,
+          sysadminAuth: false,
+          personnelAuth: true
+        }
       }
     ]
   },
@@ -243,13 +423,6 @@ router.beforeEach((to, from, next) => {
         next();
       } else {
         next("/personnel/main");
-      }
-    } else if (to.meta.incubateeAuth) {
-      const authUser = JSON.parse(window.localStorage.getItem("lbUser"));
-      if (authUser.role === "INCUBATEE") {
-        next();
-      } else {
-        next("/incubatee/main");
       }
     }
   } else {

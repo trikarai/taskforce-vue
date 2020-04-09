@@ -7,13 +7,14 @@
       <v-spacer></v-spacer>
       <v-toolbar-items class="d-none d-md-flex d-lg-flex">
         <v-btn dark text>Home</v-btn>
-        <v-btn dark to="/sysadmin" text>Sys Admin</v-btn>
-        <!-- <v-btn
+        <v-btn dark text :to="{name: 'sysadminlogin'}">Sys Admin</v-btn>
+        <v-btn dark text :to="{name: 'tenantlogin'}">Admin</v-btn>
+        <v-btn
           style=" border-radius: 28px !important;height: 34px !important;position: relative;top: 16px;"
           dark
           color="primary"
-          to="/login"
-        >Login</v-btn> -->
+          :to="{name: 'personnellogin'}"
+        >Personnel</v-btn>
       </v-toolbar-items>
 
       <v-menu left bottom>
@@ -180,7 +181,7 @@
             </v-flex>
           </v-layout>
         </v-container>
-      </section> -->
+      </section>-->
 
       <v-footer color="primary darken-2">
         <v-layout row wrap align-center>
