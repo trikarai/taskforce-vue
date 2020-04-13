@@ -8,7 +8,10 @@
           class="elevation-2"
           item-key="id"
           :loading="loadingData"
-        ></v-data-table>
+        >
+          <template v-slot:item.startDate="{item}">{{item.startDate | moment("Do MMM, YYYY")}}</template>
+          <template v-slot:item.endDate="{item}">{{item.endDate | moment("Do MMM, YYYY")}}</template>
+        </v-data-table>
       </v-col>
     </v-row>
     <v-dialog
