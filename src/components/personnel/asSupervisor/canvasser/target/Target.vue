@@ -3,10 +3,25 @@
     <v-row>
       <!-- <v-col lg="12">{{$store.getters.getTargetType}}</v-col> -->
       <v-col md="12" lg="12" xs="12">
-        <v-btn color="primary">
+        <v-btn
+          @click="openCanvassTarget()"
+          color="primary"
+          v-if="$store.getters.getTargetType === 'canvass'"
+        >
           <v-icon left>mdi-target</v-icon>
           Add {{$store.getters.getTargetType}} Target
         </v-btn>
+        <v-btn
+          @click="openSuveyTarget()"
+          color="primary"
+          v-if="$store.getters.getTargetType === 'survey'"
+        >
+          <v-icon left>mdi-target</v-icon>
+          Add {{$store.getters.getTargetType}} Target
+        </v-btn>
+      </v-col>
+      <v-col md="12" lg="12" xs="12" v-if="loadingData">
+        <v-skeleton-loader type="table"></v-skeleton-loader>
       </v-col>
       <v-col md="12" lg="12" xs="12" v-if="data.total > 0">
         <v-data-table
@@ -77,6 +92,9 @@
         <v-skeleton-loader v-else type="paragraph" class="ma-2" />
       </v-card>
     </v-dialog>
+
+    <canvass-target v-if="dialogCanvass" :dialog.sync="dialogCanvass" @refreshParent="refresh" />
+    <survey-target v-if="dialogSurvey" :dialog.sync="dialogSurvey" @refreshParent="refresh" />
   </v-container>
 </template>
 
@@ -84,6 +102,9 @@
 import bus from "@/config/bus";
 import * as config from "@/config/config";
 import auth from "@/config/auth";
+
+import CanvassTarget from "./DialogCanvasTargert";
+import SurveyTarget from "./DialogSurveyTargert";
 
 export default {
   data() {
@@ -105,8 +126,14 @@ export default {
           name: "",
           id: ""
         }
-      }
+      },
+      dialogCanvass: false,
+      dialogSurvey: false
     };
+  },
+  components: {
+    CanvassTarget,
+    SurveyTarget
   },
   created() {
     if (this.$store.getters.getOrganizationId === "") {
@@ -204,6 +231,17 @@ export default {
           });
           break;
       }
+    },
+    openCanvassTarget() {
+      this.dialogCanvass = true;
+    },
+    openSuveyTarget() {
+      this.dialogSurvey = true;
+    },
+    refresh() {
+      this.dialogCanvass = false;
+      this.dialogSurvey = false;
+      this.getDataList();
     }
   }
 };
