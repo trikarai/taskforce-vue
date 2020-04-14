@@ -1,8 +1,8 @@
 <template>
-  <v-container extended grid-list-xs>
+  <v-container fluid>
     <v-row>
       <!-- {{$store.getters.getOrganizationId}} -->
-      <v-col lg="6">
+      <v-col cols="12" lg="6" md="6" sm="12" xs="12">
         <v-select
           :items="organizations.list"
           item-text="organization.name"
@@ -16,7 +16,7 @@
         ></v-select>
       </v-col>
 
-      <v-col md="12" lg="12" xs="12">
+      <v-col cols="12" md="12" lg="12" xs="12">
         <v-btn
           color="primary"
           :to="{name: 'personnel-spv-assignmentplans-create'}"
@@ -25,7 +25,7 @@
           <v-icon left>mdi-plus</v-icon>Create Assigment Plan
         </v-btn>
       </v-col>
-      <v-col md="12" lg="12" xs="12">
+      <v-col cols="12" md="12" lg="12" xs="12">
         <v-data-table
           :headers="headers"
           :items="data.list"
@@ -34,6 +34,14 @@
           :loading="loadingData"
         >
           <template v-slot:item.action="{item}">
+            <v-btn
+              small
+              color="accent"
+              class="mr-2"
+              :to="{name:'personnel-spv-assignmentplans-targets', params: { planId: item.id }}"
+            >
+              <v-icon>mdi-target</v-icon>
+            </v-btn>
             <v-btn
               class="mr-2"
               small

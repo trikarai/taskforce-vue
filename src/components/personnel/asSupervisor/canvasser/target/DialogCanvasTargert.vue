@@ -18,10 +18,10 @@
       </v-card-title>
       <v-card-text>
         <v-row>
-          <v-col lg="4">
+          <v-col cols="12" lg="4" md="4" sm="6" xs="12">
             <v-text-field label="Search" v-model="search" outlined dense></v-text-field>
           </v-col>
-          <v-col lg="12">
+          <v-col cols="12" lg="12">
             <v-data-table
               :search="search"
               v-model="selected"

@@ -1,7 +1,7 @@
 <template>
-  <v-container extended grid-list-xs>
+  <v-container>
     <v-row>
-      <v-col md="12" lg="12" xs="12">
+      <v-col cols="12" md="12" lg="12" xs="12">
         <v-data-table
           :headers="headers"
           :items="data.list"

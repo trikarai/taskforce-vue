@@ -1,14 +1,14 @@
 <template>
-  <v-container extended grid-list-xs>
+  <v-container>
     <v-row>
       <!-- {{$store.state.organizationId}} -->
-      <v-col xs="12" sm="12" md="12" lg="6">
+      <v-col cols="12">
         <v-card>
           <v-card-title>Create Assignment Plan</v-card-title>
           <v-card-text>
             <v-form v-model="valid" ref="form" lazy-validation>
               <v-row>
-                <v-col xs="12" sm="12" md="12" lg="6">
+                <v-col cols="12" sm="12" md="6" lg="6">
                   <v-select
                     :loading="loadingForm"
                     v-model="params.assignmentFormId"
@@ -21,7 +21,7 @@
                     :rules="rulesRequired"
                   ></v-select>
                 </v-col>
-                <v-col xs="12" sm="12" md="12" lg="6">
+                <v-col cols="12" sm="12" md="6" lg="6">
                   <v-text-field
                     v-model="params.name"
                     label="Plan Name"
@@ -30,7 +30,7 @@
                     :rules="rulesName"
                   ></v-text-field>
                 </v-col>
-                <v-col xs="12" sm="12" md="12" lg="12">
+                <v-col cols="12" sm="12" md="12" lg="12">
                   <v-textarea
                     v-model="params.description"
                     label="Description"
@@ -39,7 +39,7 @@
                     dense
                   ></v-textarea>
                 </v-col>
-                <v-col xs="12" sm="12" md="6">
+                <v-col cols="12" sm="6" md="6" lg="6">
                   <v-select
                     v-model="params.periodUnit"
                     :items="['once','month', 'week', 'year']"
@@ -49,7 +49,7 @@
                     :rules="rulesRequired"
                   ></v-select>
                 </v-col>
-                <v-col xs="12" sm="12" md="6">
+                <v-col cols="12" sm="6" md="6" lg="6">
                   <v-text-field
                     v-model="params.periodLength"
                     label="Periode Length"
@@ -58,7 +58,7 @@
                     type="number"
                   ></v-text-field>
                 </v-col>
-                <v-col xs="12" sm="12" md="6">
+                <v-col cols="12" sm="6" md="6" lg="6">
                   <v-menu
                     ref="menu"
                     v-model="menu"
@@ -87,7 +87,7 @@
                     ></v-date-picker>
                   </v-menu>
                 </v-col>
-                <v-col sm="6" md="6">
+                <v-col cols="12" sm="6" md="6" lg="6">
                   <v-menu
                     ref="menu2"
                     v-model="menu2"
@@ -117,7 +117,7 @@
                     ></v-date-picker>
                   </v-menu>
                 </v-col>
-                <v-col sm="12" md="6">
+                <v-col cols="12" sm="12" md="6">
                   <v-text-field
                     v-model="params.visitNumber"
                     label="Visit"
@@ -129,7 +129,7 @@
                     required
                   ></v-text-field>
                 </v-col>
-                <v-col md="12">
+                <v-col cols="12" md="12">
                   <v-select
                     :loading="loadingWorker"
                     :items="fieldWorkers.list"

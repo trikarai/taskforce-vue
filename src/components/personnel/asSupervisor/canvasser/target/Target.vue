@@ -1,8 +1,8 @@
 <template>
-  <v-container extended grid-list-xs>
+  <v-container fluid>
     <v-row>
       <!-- <v-col lg="12">{{$store.getters.getTargetType}}</v-col> -->
-      <v-col md="12" lg="12" xs="12">
+      <v-col cols="12" md="12" lg="12" xs="12">
         <v-btn
           @click="openCanvassTarget()"
           color="primary"
@@ -20,10 +20,10 @@
           Add {{$store.getters.getTargetType}} Target
         </v-btn>
       </v-col>
-      <v-col md="12" lg="12" xs="12" v-if="loadingData">
+      <v-col cols="12" md="12" lg="12" xs="12" v-if="loadingData">
         <v-skeleton-loader type="table"></v-skeleton-loader>
       </v-col>
-      <v-col md="12" lg="12" xs="12" v-if="data.total > 0">
+      <v-col cols="12" md="12" lg="12" xs="12" v-if="data.total > 0">
         <v-data-table
           :headers="headers"
           :items="data.list"
@@ -60,7 +60,7 @@
           </template>
         </v-data-table>
       </v-col>
-      <v-col md="12" lg="12" xs="12" v-else>
+      <v-col cols="12" md="12" lg="12" xs="12" v-else>
         <v-alert type="info" :value="true">No {{$store.getters.getTargetType}} target available</v-alert>
       </v-col>
     </v-row>

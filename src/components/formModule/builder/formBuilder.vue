@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row>
-      <v-col md="4">
+      <v-col cols="12" md="4">
         <v-card min-height="100%">
           <v-card-title primary-title>
             Element
@@ -10,15 +10,17 @@
           </v-card-title>
           <v-card-text>
             <v-row>
-              <v-col class="my-0 py-0" md="9">
+              <v-col cols="12" lg="9" md="9" sm="6" xs="12">
                 <v-text-field disabled dense label="Text" outlined clearable></v-text-field>
               </v-col>
-              <v-col class="my-0 py-0" md="3">
+              <v-col cols="12" lg="3" md="3" sm="6" xs="12">
                 <v-btn class="mt-1" x-small fab color="primary" @click="addString">
                   <v-icon small>mdi-plus</v-icon>
                 </v-btn>
               </v-col>
-              <v-col class="my-0 py-0" md="9">
+            </v-row>
+            <v-row>
+              <v-col cols="12" lg="9" md="9" sm="6" xs="12">
                 <v-textarea
                   class="my-0 py-0"
                   disabled
@@ -29,12 +31,14 @@
                   clearable
                 ></v-textarea>
               </v-col>
-              <v-col class="my-0 py-0" md="3">
+              <v-col cols="12" lg="3" md="3" sm="6" xs="12">
                 <v-btn class="mt-1" x-small fab color="primary" @click="addTextarea">
                   <v-icon small>mdi-plus</v-icon>
                 </v-btn>
               </v-col>
-              <v-col class="my-0 py-0" md="9">
+            </v-row>
+            <v-row>
+              <v-col cols="12" lg="9" md="9" sm="6" xs="12">
                 <v-text-field disabled dense label="Number" type="number" outlined clearable></v-text-field>
               </v-col>
               <v-col class="my-0 py-0" md="3">
@@ -42,17 +46,21 @@
                   <v-icon small>mdi-plus</v-icon>
                 </v-btn>
               </v-col>
-              <v-col class="my-0 py-0" md="9">
+            </v-row>
+            <v-row>
+              <v-col cols="12" lg="9" md="9" sm="6" xs="12">
                 <v-radio-group>
                   <v-radio disabled v-for="n in 2" :key="n" :label="`Radio ${n}`" :value="n"></v-radio>
                 </v-radio-group>
               </v-col>
-              <v-col class="my-0 py-0" md="3">
+              <v-col cols="12" lg="3" md="3" sm="6" xs="12">
                 <v-btn class="mt-5" x-small fab color="primary" @click="addRadio">
                   <v-icon small>mdi-plus</v-icon>
                 </v-btn>
               </v-col>
-              <v-col class="my-0 py-0" md="9">
+            </v-row>
+            <v-row>
+              <v-col cols="12" lg="9" md="9" sm="6" xs="12">
                 <v-select
                   disabled
                   dense
@@ -63,15 +71,17 @@
                   outlined
                 ></v-select>
               </v-col>
-              <v-col class="my-0 py-0" md="3">
+              <v-col cols="12" lg="3" md="3" sm="6" xs="12">
                 <v-btn class="mt-1" x-small fab color="primary" @click="addSelectMulti">
                   <v-icon small>mdi-plus</v-icon>
                 </v-btn>
               </v-col>
-              <v-col class="my-0 py-0" md="9">
+            </v-row>
+            <v-row>
+              <v-col cols="12" lg="9" md="9" sm="6" xs="12">
                 <v-file-input disabled dense label="File input" clearable outlined></v-file-input>
               </v-col>
-              <v-col class="my-0 py-0" md="3">
+              <v-col cols="12" lg="3" md="3" sm="6" xs="12">
                 <v-btn class="mt-1" x-small fab color="primary" @click="addAttachment" disabled>
                   <v-icon small>mdi-plus</v-icon>
                 </v-btn>
@@ -80,23 +90,18 @@
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col md="8">
+      <v-col cols="12" md="8">
         <v-card min-height="550px" :loading="loading">
           <v-card-title>
             Form Builder
             <v-spacer></v-spacer>
-            <v-btn
-              class="ml-5"
-              color="primary"
-              @click="dialogPreview = true"
-              :disabled="fields.length == 0"
-            >
+            <v-btn color="primary" @click="dialogPreview = true" :disabled="fields.length == 0">
               <v-icon left>mdi-text-box-search-outline</v-icon>Form Preview
             </v-btn>
           </v-card-title>
           <v-card-text>
             <v-row>
-              <v-col md="12">
+              <v-col cols="12" lg="12" md="12" sm="12">
                 <v-text-field
                   outlined
                   counter="25"
@@ -106,7 +111,7 @@
                   dense
                 ></v-text-field>
               </v-col>
-              <v-col md="12">
+              <v-col cols="12" lg="12" md="12" sm="12">
                 <v-textarea
                   counter="500"
                   maxlength="500"
@@ -142,15 +147,15 @@
           <v-card-text>
             <transition-group name="slide-fade">
               <template v-for="(field, index) in fields">
-                <v-row :key="index" class="my-0 py-0">
-                  <v-col class="my-0 py-0" md="8">
+                <v-row :key="index">
+                  <v-col cols="12" lg="8" md="8" sm="8" xs="8">
                     <v-row>
-                      <v-col class="mt-4" md="2">
-                        <v-btn fab x-small color="primary" @click="openProperties(index, field)">
+                      <v-col cols="12" lg="2" md="2" sm="2">
+                        <v-btn class="mt-2" fab x-small color="primary" @click="openProperties(index, field)">
                           <v-icon small>mdi-wrench-outline</v-icon>
                         </v-btn>
                       </v-col>
-                      <v-col md="10">
+                      <v-col cols="12" lg="10" md="10" sm="10">
                         <field-module
                           :field="field"
                           :index="index"
@@ -160,7 +165,7 @@
                       </v-col>
                     </v-row>
                   </v-col>
-                  <v-col md="4">
+                  <v-col cols="12" lg="4" md="4" sm="4" xs="4">
                     <template>
                       <v-btn
                         class="mt-3"

@@ -2,30 +2,30 @@
   <div>
     <v-card-title>Selection Properties</v-card-title>
     <v-row class="pa-5">
-      <v-col md="12">
+      <v-col cols="auto" md="12">
         <v-text-field label="Label Name" v-model="field.name"></v-text-field>
       </v-col>
-      <v-col md="6">
+      <v-col cols="auto" md="6">
         <v-text-field label="Position" v-model="field.position" disabled></v-text-field>
       </v-col>
-      <v-col md="6">
+      <v-col cols="auto" md="6">
         <v-text-field label="Grid Position" disabled></v-text-field>
       </v-col>
       <template v-if="field.type == 'select'">
-        <v-col md="6">
+        <v-col cols="auto" md="6">
           <v-text-field label="Min Selection" v-model="field.minValue" type="number"></v-text-field>
         </v-col>
-        <v-col md="6">
+        <v-col cols="auto" md="6">
           <v-text-field label="Max Selection" v-model="field.maxValue" type="number"></v-text-field>
         </v-col>
       </template>
-      <v-col md="12">
+      <v-col cols="auto" md="12">
         <v-checkbox v-model="field.mandatory" :label="`Required : ${field.mandatory.toString()}`"></v-checkbox>
       </v-col>
-      <v-col md="12">
+      <v-col cols="auto" md="12">
         <v-form ref="formoption" v-model="validoption">
           <v-row>
-            <v-col md="8">
+            <v-col cols="auto" md="8">
               <v-text-field
                 v-model="optionAdd"
                 label="Options List"
@@ -35,7 +35,7 @@
                 @keydown.enter.prevent="addOption()"
               ></v-text-field>
             </v-col>
-            <v-col md="4">
+            <v-col cols="auto" md="4">
               <v-btn small fab color="primary" @click="addOption" :disabled="!validoption">
                 <v-icon small>mdi-plus</v-icon>
               </v-btn>
@@ -45,7 +45,7 @@
 
         <v-list two-line>
           <transition-group name="slide-fade">
-            <v-list-item v-for="(opt, index) in field.options" :key="index">
+            <v-list-item v-for="(opt, index) in field.options" :key="opt">
               <v-list-item-avatar></v-list-item-avatar>
               <v-list-item-content>
                 <v-list-item-title v-text="opt.name"></v-list-item-title>
