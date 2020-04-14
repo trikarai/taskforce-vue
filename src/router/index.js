@@ -31,6 +31,7 @@ import PersonnelLayout from "../views/layout/personnel/PersonnelLayout";
 import PersonnelSupervisorAssigmentPlans from "../components/personnel/asSupervisor/AssignmentPlans";
 import PersonnelSupervisorAssigmentPlanCreate from "../components/personnel/asSupervisor/createAssignmentPlan";
 import PersonnelSupervisorAssigmentPlanCanvassers from "../components/personnel/asSupervisor/canvasser/Canvassers";
+import PersonnelSupervisorAssigmentPlanTarget from "../components/personnel/asSupervisor/target/Target";
 import PersonnelSupervisorAssigmentPlanCanvasserTargets from "../components/personnel/asSupervisor/canvasser/target/Target";
 import PersonnelSupervisorAssigmentPlanCanvasserTargetAssignments from "../components/personnel/asSupervisor/canvasser/target/assignment/Assignments";
 
@@ -302,6 +303,19 @@ const routes = [
         meta: {
           text: "Create Assignment Plans",
           level: 2,
+          requiredAuth: true,
+          adminAuth: false,
+          sysadminAuth: false,
+          personnelAuth: true
+        }
+      },
+      {
+        path: "/personnel/supervisor/assignment-plan/:planId/target",
+        component: PersonnelSupervisorAssigmentPlanTarget,
+        name: "personnel-spv-assignmentplans-targets",
+        meta: {
+          text: "Assignment Plan's Target ",
+          level: 3,
           requiredAuth: true,
           adminAuth: false,
           sysadminAuth: false,
