@@ -48,6 +48,12 @@
             <v-list-item-title class="grey--text">as Supervisor</v-list-item-title>
           </v-list-item-content>
         </template>
+        <v-list-item class="ml-1" router :to="{ name: 'personnel-spv-dashboard'}">
+          <v-list-item-title class="grey--text">Dashboard</v-list-item-title>
+          <v-list-item-icon>
+            <!-- <v-icon>mdi-eye</v-icon> -->
+          </v-list-item-icon>
+        </v-list-item>
         <v-list-item class="ml-1" router :to="{ name: 'personnel-spv-assignmentplans'}">
           <v-list-item-title class="grey--text">Assignment Plan</v-list-item-title>
           <v-list-item-icon>

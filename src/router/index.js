@@ -28,6 +28,9 @@ import TenantAssignmentFormPreview from "../components/formModule/builder/formPr
 // Personnel Login
 import PersonnelLogin from "../views/login/PersonnelLogin";
 import PersonnelLayout from "../views/layout/personnel/PersonnelLayout";
+// Personnel (SPV) Dashboard
+import PersonnelSupervisorDashboard from "../components/personnel/asSupervisor/dashboard/Dashboard";
+// Personnel (SPV) Assigment Plan
 import PersonnelSupervisorAssigmentPlans from "../components/personnel/asSupervisor/AssignmentPlans";
 import PersonnelSupervisorAssigmentPlanCreate from "../components/personnel/asSupervisor/createAssignmentPlan";
 import PersonnelSupervisorAssigmentPlanCanvassers from "../components/personnel/asSupervisor/canvasser/Canvassers";
@@ -283,6 +286,19 @@ const routes = [
       personnelAuth: true
     },
     children: [
+      {
+        path: "/personnel/supervisor/dashboard",
+        component: PersonnelSupervisorDashboard,
+        name: "personnel-spv-dashboard",
+        meta: {
+          text: "Supervisor Dashboard",
+          level: 1,
+          requiredAuth: true,
+          adminAuth: false,
+          sysadminAuth: false,
+          personnelAuth: true
+        }
+      },
       {
         path: "/personnel/supervisor/assignment-plan",
         component: PersonnelSupervisorAssigmentPlans,
