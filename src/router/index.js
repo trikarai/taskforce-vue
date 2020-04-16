@@ -28,8 +28,10 @@ import TenantAssignmentFormPreview from "../components/formModule/builder/formPr
 // Personnel Login
 import PersonnelLogin from "../views/login/PersonnelLogin";
 import PersonnelLayout from "../views/layout/personnel/PersonnelLayout";
-// Personnel (SPV) Dashboard
-import PersonnelSupervisorDashboard from "../components/personnel/asSupervisor/dashboard/Dashboard";
+// Personnel (SPV) Summary
+import PersonnelSupervisorCanvassSummary from "../components/personnel/asSupervisor/summary/CanvassSummary";
+// Personnel (SPV) Statistic Operation
+import PersonnelSupervisorStatisticOperation from "../components/personnel/asSupervisor/statistic/Operation";
 // Personnel (SPV) Assigment Plan
 import PersonnelSupervisorAssigmentPlans from "../components/personnel/asSupervisor/AssignmentPlans";
 import PersonnelSupervisorAssigmentPlanCreate from "../components/personnel/asSupervisor/createAssignmentPlan";
@@ -287,11 +289,24 @@ const routes = [
     },
     children: [
       {
-        path: "/personnel/supervisor/dashboard",
-        component: PersonnelSupervisorDashboard,
-        name: "personnel-spv-dashboard",
+        path: "/personnel/supervisor/canvass-summary",
+        component: PersonnelSupervisorCanvassSummary,
+        name: "personnel-spv-canvass-summary",
         meta: {
-          text: "Supervisor Dashboard",
+          text: "Canvass Summary",
+          level: 1,
+          requiredAuth: true,
+          adminAuth: false,
+          sysadminAuth: false,
+          personnelAuth: true
+        }
+      },
+      {
+        path: "/personnel/supervisor/statistic-operation",
+        component: PersonnelSupervisorStatisticOperation,
+        name: "personnel-spv-canvass-statisticops",
+        meta: {
+          text: "Statistic Operation",
           level: 1,
           requiredAuth: true,
           adminAuth: false,
