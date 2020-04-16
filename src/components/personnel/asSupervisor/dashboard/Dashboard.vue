@@ -233,7 +233,7 @@ export default {
         }
       ],
       summaryComplete: {
-        total: 1,
+        total: 0,
         list: [
           {
             id: "xxx",
@@ -244,16 +244,10 @@ export default {
         ]
       },
       summaryIncomplete: {
-        total: 2,
+        total: 1,
         list: [
           {
-            id: "xxx1",
-            startDate: "21-10-2020",
-            endDate: "22-11-2020",
-            completed: false
-          },
-          {
-            id: "xxx2",
+            id: "xxx",
             startDate: "21-10-2020",
             endDate: "22-11-2020",
             completed: false
