@@ -54,7 +54,7 @@
             <!-- <v-icon>mdi-eye</v-icon> -->
           </v-list-item-icon>
         </v-list-item>
-        <v-list-item class="ml-1" router :to="{ name: 'personnel-spv-statisticops'}">
+        <v-list-item class="ml-1" router :to="{ name: 'personnel-spv-statistic-ops'}">
           <v-list-item-title class="grey--text">Statistic Ops</v-list-item-title>
           <v-list-item-icon>
             <!-- <v-icon>mdi-eye</v-icon> -->

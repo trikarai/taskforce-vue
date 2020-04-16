@@ -1,19 +1,24 @@
 <template>
   <v-container fluid>
     <v-row id="list" v-if="!showDetail">
-      <v-data-table
-        :headers="headers"
-        :items="data.list"
-        class="elevation-1"
-        item-key="id"
-        :loading="loadingData"
-      >
-        <template v-slot:item.action="{item}">
-          <v-btn color="accent" small @click="getDataDetail(item.id)">
-            <v-icon small left>mdi-monitor-eye</v-icon>
-          </v-btn>
-        </template>
-      </v-data-table>
+      <v-col cols="12" lg="6" md="8" sm="12" xs="12">
+        <v-data-table
+          :headers="headers"
+          :items="data.list"
+          class="elevation-1"
+          item-key="id"
+          :loading="loadingData"
+        >
+          <template v-slot:item.action="{item}">
+            <v-btn color="accent" small @click="getDataDetail(item.id)">
+              <v-icon small left>mdi-monitor-eye</v-icon>
+            </v-btn>
+          </template>
+        </v-data-table>
+      </v-col>
+      <v-col cols="12" lg="12" md="12">
+        <v-btn color="success" @click="showDetail = true">test open detail</v-btn>
+      </v-col>
     </v-row>
     <v-row id="detail" v-else>
       <v-col cols="2">
@@ -41,7 +46,34 @@ export default {
       loadingData: false,
       showDetail: false,
       data: { total: 0, list: [] },
-      dataDetail: {},
+      dataDetail: {
+        id: "id",
+        name: "dummy name",
+        description: "dummy description",
+        integerFormulas: [
+          {
+            id: "id",
+            name: "name",
+            computationOperand: "+",
+            includedIntegerFields: [
+              {
+                id: "id",
+                comparisonOperand: "==",
+                comparisonValue: ">",
+                integerField: [
+                  {
+                    id: "id",
+                    name: "name",
+                    assignmentForm: { id: "id", name: "name" }
+                  }
+                ]
+              }
+            ],
+            singleSelectFormulas: [],
+            multiSelectFormulas: []
+          }
+        ]
+      },
       headers: [
         {
           text: "Name",

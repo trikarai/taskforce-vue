@@ -294,7 +294,7 @@ const routes = [
         name: "personnel-spv-canvass-summary",
         meta: {
           text: "Canvass Summary",
-          level: 1,
+          level: 0,
           requiredAuth: true,
           adminAuth: false,
           sysadminAuth: false,
@@ -304,10 +304,10 @@ const routes = [
       {
         path: "/personnel/supervisor/statistic-operation",
         component: PersonnelSupervisorStatisticOperation,
-        name: "personnel-spv-canvass-statisticops",
+        name: "personnel-spv-statistic-ops",
         meta: {
           text: "Statistic Operation",
-          level: 1,
+          level: 0,
           requiredAuth: true,
           adminAuth: false,
           sysadminAuth: false,
@@ -320,7 +320,7 @@ const routes = [
         name: "personnel-spv-assignmentplans",
         meta: {
           text: "Assignment Plans",
-          level: 1,
+          level: 0,
           requiredAuth: true,
           adminAuth: false,
           sysadminAuth: false,
