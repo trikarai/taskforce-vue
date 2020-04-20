@@ -27,9 +27,30 @@
         </v-btn>
       </v-col>
       <v-col cols="12">
-        <pre>
-              {{dataDetail}}
-          </pre>
+        <v-row>
+          <v-col cols="12" lg="12">{{dataDetail.name}}</v-col>
+          <v-col cols="12" lg="12">{{dataDetail.description}}</v-col>
+        </v-row>
+      </v-col>
+      <v-col cols="12">
+        <v-row>
+          <v-col
+            cols="12"
+            lg="12"
+            v-for="data in dataDetail.integerFormulas"
+            :key="data.id"
+          >{{data}}</v-col>
+        </v-row>
+      </v-col>
+      <v-col cols="12">
+        <v-row>
+          <v-col
+            cols="12"
+            lg="12"
+            v-for="data in dataDetail.singleSelectFormulas"
+            :key="data.id"
+          >{{data}}</v-col>
+        </v-row>
       </v-col>
     </v-row>
   </v-container>
@@ -52,37 +73,63 @@ export default {
         description: "dummy description",
         integerFormulas: [
           {
-            id: "id",
+            id: "id-if",
             name: "name",
             computationOperand: "+",
             includedIntegerFields: [
               {
-                id: "id",
+                id: "id-if",
                 comparisonOperand: "==",
                 comparisonValue: ">",
                 integerField: [
                   {
-                    id: "id",
-                    name: "name",
-                    assignmentForm: { id: "id", name: "name" }
+                    id: "idif",
+                    name: "Integer Field Name",
+                    assignmentForm: { id: "id-form", name: "form name" }
                   }
                 ]
               }
-            ],
-            singleSelectFormulas: [],
-            multiSelectFormulas: []
+            ]
+          }
+        ],
+        singleSelectFormulas: [
+          {
+            id: "id-sf",
+            name: "Select Formula",
+            singleSelectField: {
+              id: "idsf",
+              name: "Single Select Field Name",
+              assignmentForm: { id: "id-form", name: "form name" }
+            },
+            option: [
+              { id: "id-opt-1", name: "option 1" },
+              { id: "id-opt-2", name: "option 2" }
+            ]
+          }
+        ],
+        multiSelectFormulas: [
+          {
+            id: "id-msf",
+            name: "Multi Select Formula",
+            multiSelectField: {
+              id: "idsf",
+              name: "Single Select Field Name",
+              assignmentForm: { id: "id-form", name: "form name" }
+            },
+            option: [
+              { id: "id-opt-1", name: "option 1" },
+              { id: "id-opt-2", name: "option 2" }
+            ]
           }
         ]
       },
       headers: [
         {
           text: "Name",
-          value: "name"
+          value: "name",
+          sortable: false
         },
-        {
-          text: "",
-          value: "action"
-        }
+        { text: "", value: "action", sortable: false, align: "right" }
       ]
     };
   },
