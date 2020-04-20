@@ -14,6 +14,11 @@
           return-object
           @change="mutateOrganization"
         ></v-select>
+        <v-alert
+          v-if="organizations.total === 0"
+          type="warning"
+          :value="true"
+        >No Supervisor Role Assigned to your account</v-alert>
       </v-col>
 
       <v-col cols="12" md="12" lg="12" xs="12">

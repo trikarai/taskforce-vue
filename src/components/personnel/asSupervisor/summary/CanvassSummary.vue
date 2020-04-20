@@ -13,9 +13,14 @@
           return-object
           @change="mutateOrganization"
         ></v-select>
+        <v-alert
+          v-if="organizations.total === 0"
+          type="warning"
+          :value="true"
+        >No Supervisor Role Assigned to your account</v-alert>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row v-show="organizations.total !== 0">
       <v-col cols="12" lg="4" v-if="summaryToday !== null">
         <v-card elevation="5" :loading="loadingToday">
           <v-card-title primary-title>Today</v-card-title>
@@ -143,7 +148,7 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row v-show="organizations.total !== 0">
       <v-col cols="12" lg="12" md="12">
         <v-card elevation="3" min-height="500">
           <v-tabs v-model="tab" color="primary" background-color="accent" slider-color="primary">
