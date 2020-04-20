@@ -25,6 +25,8 @@ import TenantAssignmentForm from "../components/tenant/form/AssignmentForms";
 import TenantAssignmentFormBuild from "../components/tenant/form/buildAssignmentForm";
 import TenantAssignmentFormPreview from "../components/formModule/builder/formPreview";
 
+import TenantStatisticOperations from "../components/tenant/statistic/StatisticOperations";
+
 // Personnel Login
 import PersonnelLogin from "../views/login/PersonnelLogin";
 import PersonnelLayout from "../views/layout/personnel/PersonnelLayout";
@@ -220,6 +222,19 @@ const routes = [
         name: "tenant-admin-personnels",
         meta: {
           text: "Personnel Management",
+          level: 0,
+          requiredAuth: true,
+          adminAuth: true,
+          sysadminAuth: false,
+          personnelAuth: false
+        }
+      },
+      {
+        path: "/tenant/statistic-operation",
+        component: TenantStatisticOperations,
+        name: "tenant-statistic-operations",
+        meta: {
+          text: "Statistic Operation",
           level: 0,
           requiredAuth: true,
           adminAuth: true,
@@ -468,7 +483,8 @@ const routes = [
         }
       },
       {
-        path: "/personnel/fieldworker/canvass-assignment/:assignmentId/report/:reportId",
+        path:
+          "/personnel/fieldworker/canvass-assignment/:assignmentId/report/:reportId",
         component: PersonnelFieldWorkerCanvassAssigmentReportDetail,
         name: "personnel-fw-canvass-assignments-report-detail",
         meta: {

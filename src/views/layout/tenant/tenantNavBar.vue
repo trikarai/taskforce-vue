@@ -12,7 +12,7 @@
     </v-app-bar>
 
     <v-btn text class="mt-2" v-if="$route.meta.level !== 0" @click="$router.go(-1) ">
-      <v-icon left>mdi-arrow-left</v-icon> Back
+      <v-icon left>mdi-arrow-left</v-icon>Back
     </v-btn>
     <!-- <p class="ml-3 mb-2">{{$route.name}}</p> -->
 
@@ -133,6 +133,12 @@ export default {
           icon: "mdi-ballot-outline",
           text: "Assignment Form",
           route: "/tenant/assignment-form",
+          disabled: false
+        },
+        {
+          icon: "mdi-calculator-variant",
+          text: "Statistic Operation",
+          route: "/tenant/statistic-operation",
           disabled: false
         }
       ]
