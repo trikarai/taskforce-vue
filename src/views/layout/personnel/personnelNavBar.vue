@@ -63,7 +63,13 @@
           </v-list-item-content>
         </template>
         <v-list-item class="ml-1" router :to="{ name: 'personnel-spv-canvass-summary'}">
-          <v-list-item-title class="grey--text">Canvass Summary</v-list-item-title>
+          <v-list-item-title class="grey--text">Dashboard</v-list-item-title>
+          <v-list-item-icon>
+            <!-- <v-icon>mdi-eye</v-icon> -->
+          </v-list-item-icon>
+        </v-list-item>
+        <v-list-item class="ml-1" router :to="{ name: 'personnel-spv-canvass-report'}">
+          <v-list-item-title class="grey--text">Report</v-list-item-title>
           <v-list-item-icon>
             <!-- <v-icon>mdi-eye</v-icon> -->
           </v-list-item-icon>

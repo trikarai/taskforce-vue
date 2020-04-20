@@ -28,8 +28,9 @@ import TenantAssignmentFormPreview from "../components/formModule/builder/formPr
 // Personnel Login
 import PersonnelLogin from "../views/login/PersonnelLogin";
 import PersonnelLayout from "../views/layout/personnel/PersonnelLayout";
-// Personnel (SPV) Summary
+// Personnel (SPV) Summary & Report
 import PersonnelSupervisorCanvassSummary from "../components/personnel/asSupervisor/summary/CanvassSummary";
+import PersonnelSupervisorCanvassReport from "../components/personnel/asSupervisor/report/CanvassReport";
 // Personnel (SPV) Statistic Operation
 import PersonnelSupervisorStatisticOperation from "../components/personnel/asSupervisor/statistic/Operation";
 // Personnel (SPV) Assigment Plan
@@ -299,6 +300,19 @@ const routes = [
         name: "personnel-spv-canvass-summary",
         meta: {
           text: "Canvass Summary",
+          level: 0,
+          requiredAuth: true,
+          adminAuth: false,
+          sysadminAuth: false,
+          personnelAuth: true
+        }
+      },
+      {
+        path: "/personnel/supervisor/canvass-report",
+        component: PersonnelSupervisorCanvassReport,
+        name: "personnel-spv-canvass-report",
+        meta: {
+          text: "Canvass Report",
           level: 0,
           requiredAuth: true,
           adminAuth: false,
