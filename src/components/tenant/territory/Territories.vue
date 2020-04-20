@@ -2,12 +2,12 @@
 <template>
   <v-container extended grid-list-xl>
     <v-row>
-      <v-col md="8" xs="12">
+      <v-col cols="12" lg="6" md="8" xs="12">
         <v-btn color="primary" @click="openAdd">Add Territory</v-btn>
       </v-col>
     </v-row>
     <v-row>
-      <v-col md="12" lg="12" xs="12">
+      <v-col cols="12" md="12" lg="12" xs="12">
         <v-data-table
           :headers="headers"
           :items="data.list"
