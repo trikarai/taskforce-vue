@@ -251,12 +251,12 @@ export default {
       summaryIncomplete: {
         total: 1,
         list: [
-          {
-            id: "xxx",
-            startDate: "21-10-2020",
-            endDate: "22-11-2020",
-            completed: false
-          }
+          // {
+          //   id: "xxx",
+          //   startDate: "21-10-2020",
+          //   endDate: "22-11-2020",
+          //   completed: false
+          // }
         ]
       },
       loadingSummaryList: false,
