@@ -39,6 +39,11 @@ import PersonnelSupervisorAssigmentPlanCanvassers from "../components/personnel/
 import PersonnelSupervisorAssigmentPlanTarget from "../components/personnel/asSupervisor/target/Target";
 import PersonnelSupervisorAssigmentPlanCanvasserTargets from "../components/personnel/asSupervisor/canvasser/target/Target";
 import PersonnelSupervisorAssigmentPlanCanvasserTargetAssignments from "../components/personnel/asSupervisor/canvasser/target/assignment/Assignments";
+// Personnal (FW) Canvass Assigments
+import PersonnelFieldWorkerCanvassAssigments from "../components/personnel/asFieldWorker/Assignments";
+import PersonnelFieldWorkerCanvassAssigmentReports from "../components/personnel/asFieldWorker/report/Reports";
+import PersonnelFieldWorkerCanvassAssigmentReportDetail from "../components/personnel/asFieldWorker/report/Report";
+import PersonnelFieldWorkerAssigmentReportsForm from "../components/personnel/asFieldWorker/report/AssignmentForm";
 
 Vue.use(VueRouter);
 
@@ -396,7 +401,7 @@ const routes = [
       },
       {
         path:
-          "/personnel/supervisor/assignment-plan/:planId/canvasser/:canvasserId/survey-target/:targetId/assigment",
+          "/personnel/supervisor/assignment-plan/:planId/canvasser/:canvasserId/survey-target/:targetId/assignment",
         component: PersonnelSupervisorAssigmentPlanCanvasserTargetAssignments,
         name: "personnel-spv-assignmentplans-surveytarget-assignments",
         meta: {
@@ -410,12 +415,65 @@ const routes = [
       },
       {
         path:
-          "/personnel/supervisor/assignment-plan/:planId/canvasser/:canvasserId/canvass-target/:targetId/assigment",
+          "/personnel/supervisor/assignment-plan/:planId/canvasser/:canvasserId/canvass-target/:targetId/assignment",
         component: PersonnelSupervisorAssigmentPlanCanvasserTargetAssignments,
         name: "personnel-spv-assignmentplans-canvasstarget-assignments",
         meta: {
           text: "Canvasser's Canvass Target Assignments",
           level: 5,
+          requiredAuth: true,
+          adminAuth: false,
+          sysadminAuth: false,
+          personnelAuth: true
+        }
+      },
+      {
+        path: "/personnel/fieldworker/canvass-assignment",
+        component: PersonnelFieldWorkerCanvassAssigments,
+        name: "personnel-fw-canvass-assignments",
+        meta: {
+          text: "Canvass Assignments",
+          level: 0,
+          requiredAuth: true,
+          adminAuth: false,
+          sysadminAuth: false,
+          personnelAuth: true
+        }
+      },
+      {
+        path: "/personnel/fieldworker/canvass-assignment/:assignmentId/report",
+        component: PersonnelFieldWorkerCanvassAssigmentReports,
+        name: "personnel-fw-canvass-assignments-reports",
+        meta: {
+          text: "Canvass Assignments Report",
+          level: 1,
+          requiredAuth: true,
+          adminAuth: false,
+          sysadminAuth: false,
+          personnelAuth: true
+        }
+      },
+      {
+        path: "/personnel/fieldworker/canvass-assignment/:assignmentId/report/:reportId",
+        component: PersonnelFieldWorkerCanvassAssigmentReportDetail,
+        name: "personnel-fw-canvass-assignments-report-detail",
+        meta: {
+          text: "Canvass Assignments Report",
+          level: 2,
+          requiredAuth: true,
+          adminAuth: false,
+          sysadminAuth: false,
+          personnelAuth: true
+        }
+      },
+      {
+        path:
+          "/personnel/fieldworker/canvass-assignment/:assignmentId/report/form",
+        component: PersonnelFieldWorkerAssigmentReportsForm,
+        name: "personnel-fw-canvass-assignments-reports-form",
+        meta: {
+          text: "Canvass Assignments Report Form",
+          level: 2,
           requiredAuth: true,
           adminAuth: false,
           sysadminAuth: false,

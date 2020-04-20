@@ -27,7 +27,8 @@ export default {
   props: ["field", "modeReload", "index"],
   data() {
     return {
-      value: ""
+      value: "",
+      isError: false
     };
   },
   created() {

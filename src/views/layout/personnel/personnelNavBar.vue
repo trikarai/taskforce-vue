@@ -45,6 +45,20 @@
             <v-icon color="#676767">mdi-view-dashboard</v-icon>
           </v-list-item-action>
           <v-list-item-content>
+            <v-list-item-title class="grey--text">as Field Worker</v-list-item-title>
+          </v-list-item-content>
+        </template>
+        <v-list-item class="ml-1" router :to="{ name: 'personnel-fw-canvass-assignments'}">
+          <v-list-item-title class="grey--text">Canvass Assignment</v-list-item-title>
+          <v-list-item-icon></v-list-item-icon>
+        </v-list-item>
+      </v-list-group>
+      <v-list-group :value="true" no-action>
+        <template v-slot:activator>
+          <v-list-item-action>
+            <v-icon color="#676767">mdi-view-dashboard</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
             <v-list-item-title class="grey--text">as Supervisor</v-list-item-title>
           </v-list-item-content>
         </template>

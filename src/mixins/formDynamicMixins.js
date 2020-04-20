@@ -10,49 +10,43 @@ Vue.prototype._ = lodash;
 
 export const formDynamicMixins = {
   watch: {
-    watch: {
-      value() {
-        var params;
-        this.isError = false;
-        if (this.modeReload) {
-          if (this.field.type === "string") {
-            params = {
-              fieldId: this.field.stringField.id,
-              value: this.value,
-              type: this.field.type
-            };
-          } else if (this.field.type === "integer") {
-            params = {
-              fieldId: this.field.integerField.id,
-              value: this.value,
-              type: this.field.type
-            };
-          } else if (this.field.type === "textarea") {
-            params = {
-              fieldId: this.field.textAreaField.id,
-              value: this.value,
-              type: this.field.type
-            };
-            // } else if (this.field.type == 'radio') {
-            //     params = { fieldId: this.field.singleSelectField.id, value: this.value, type: this.field.type };
-            // } else if (this.field.type == 'select') {
-            //     params = { fieldId: this.field.multiSelectField.id, value: this.value, type: this.field.type };
-          } else if (this.field.type === "attachment") {
-            params = {
-              fieldId: this.field.attachmentField.id,
-              value: this.value,
-              type: this.field.type
-            };
-          }
-        } else {
+    value() {
+      var params;
+      this.isError = false;
+      if (this.modeReload) {
+        if (this.field.type === "string") {
           params = {
-            fieldId: this.field.id,
+            fieldId: this.field.stringField.id,
+            value: this.value,
+            type: this.field.type
+          };
+        } else if (this.field.type === "integer") {
+          params = {
+            fieldId: this.field.integerField.id,
+            value: this.value,
+            type: this.field.type
+          };
+        } else if (this.field.type === "textarea") {
+          params = {
+            fieldId: this.field.textAreaField.id,
+            value: this.value,
+            type: this.field.type
+          };
+        } else if (this.field.type === "attachment") {
+          params = {
+            fieldId: this.field.attachmentField.id,
             value: this.value,
             type: this.field.type
           };
         }
-        bus.$emit("getValue", params, this.index);
+      } else {
+        params = {
+          fieldId: this.field.id,
+          value: this.value,
+          type: this.field.type
+        };
       }
+      bus.$emit("getValue", params, this.index);
     }
   },
   methods: {

@@ -41,7 +41,8 @@ export default {
   data: function() {
     return {
       clearable: true,
-      value: ""
+      value: "",
+      isError: false
     };
   },
   watch: {},
