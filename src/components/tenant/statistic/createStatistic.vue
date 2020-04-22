@@ -21,48 +21,73 @@
         <v-row>
           <v-col cols="12" lg="12">{{form.description}}</v-col>
         </v-row>
-        <v-divider></v-divider>
-        <span class="title">Integer Field</span>
-        <template v-if="form.integerFields">
-          <v-alert
-            dense
-            type="info"
-            v-if="form.integerFields.length == 0"
-            :value="true"
-          >No Integer Field type found from Selected Form</v-alert>
+        <v-row v-if="loadingForm">
+          <v-col cols="12">
+            <v-skeleton-loader type="list-item@5" />
+          </v-col>
+        </v-row>
+        <template v-else>
+          <v-divider></v-divider>
+          <template v-if="form.integerFields">
+            <span class="title">Integer Field</span>
+            <v-alert
+              dense
+              type="info"
+              v-if="form.integerFields.length == 0"
+              :value="true"
+            >No Integer Field type found from Selected Form</v-alert>
+          </template>
+          <v-row v-for="field in form.integerFields" :key="field.id">
+            <v-col cols="12" lg="10">{{field.name}}</v-col>
+            <v-col cols="12" lg="2">
+              <v-btn
+                fab
+                x-small
+                color="primary"
+                :disabled="!integerSelected"
+                @click="dialogInteger = true, fieldId = field.id, fieldName = field.name"
+              >
+                <v-icon small>mdi-plus</v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
+          <v-divider></v-divider>
+          <template v-if="form.singleSelectFields">
+            <span class="title">Selection Field</span>
+            <v-alert
+              dense
+              type="info"
+              v-if="form.singleSelectFields.length == 0"
+              :value="true"
+            >No Selection Field Field type found from Selected Form</v-alert>
+          </template>
+          <v-row v-for="field in form.singleSelectFields" :key="field.id">
+            <v-col cols="12" lg="10">{{field.name}}</v-col>
+            <v-col cols="12" lg="2">
+              <v-btn fab x-small color="primary" @click="addSelectFormula(field, 'single')">
+                <v-icon small>mdi-plus</v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
+          <v-divider></v-divider>
+          <template v-if="form.multiSelectFields">
+            <span class="title">Multiple Selection Field</span>
+            <v-alert
+              dense
+              type="info"
+              v-if="form.multiSelectFields.length == 0"
+              :value="true"
+            >No Multiple Selection Field type found from Selected Form</v-alert>
+          </template>
+          <v-row v-for="field in form.multiSelectFields" :key="field.id">
+            <v-col cols="12" lg="10">{{field.name}}</v-col>
+            <v-col cols="12" lg="2">
+              <v-btn fab x-small color="primary" @click="addSelectFormula(field, 'multi')">
+                <v-icon small>mdi-plus</v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
         </template>
-        <v-row v-for="field in form.integerFields" :key="field.id">
-          <v-col cols="12" lg="10">{{field.name}}</v-col>
-          <v-col cols="12" lg="2">
-            <v-btn
-              fab
-              x-small
-              color="primary"
-              :disabled="!integerSelected"
-              @click="dialogInteger = true, fieldId = field.id, fieldName = field.name"
-            >
-              <v-icon small>mdi-plus</v-icon>
-            </v-btn>
-          </v-col>
-        </v-row>
-        <v-divider></v-divider>
-        <v-row v-for="field in form.singleSelectFields" :key="field.id">
-          <v-col cols="12" lg="10">{{field.name}}</v-col>
-          <v-col cols="12" lg="2">
-            <v-btn fab x-small color="primary" @click="addSelectFormula(field, 'single')">
-              <v-icon small>mdi-plus</v-icon>
-            </v-btn>
-          </v-col>
-        </v-row>
-        <v-divider></v-divider>
-        <v-row v-for="field in form.multiSelectFields" :key="field.id">
-          <v-col cols="12" lg="10">{{field.name}}</v-col>
-          <v-col cols="12" lg="2">
-            <v-btn fab x-small color="primary" @click="addSelectFormula(field, 'multi')">
-              <v-icon small>mdi-plus</v-icon>
-            </v-btn>
-          </v-col>
-        </v-row>
       </v-col>
       <v-col cols="12" lg="8">
         <v-card>
