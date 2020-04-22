@@ -57,7 +57,10 @@ export default {
       valid: false,
       operands: [
         { value: "SUM", description: "SUMMARY" },
-        { value: "AVG", description: "AVERAGE" }
+        { value: "AVG", description: "AVERAGE" },
+        { value: "MIN", description: "MIN" },
+        { value: "MAX", description: "MAX" },
+        { value: "COUNT", description: "COUNT" }
       ],
       params: {
         name: "",
