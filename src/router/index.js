@@ -27,6 +27,7 @@ import TenantAssignmentFormPreview from "../components/formModule/builder/formPr
 
 import TenantStatisticOperations from "../components/tenant/statistic/StatisticOperations";
 import TenantStatisticOperationCreate from "../components/tenant/statistic/createStatistic";
+import TenantStatisticOperationDetail from "../components/tenant/statistic/StatisticDetail";
 
 // Personnel Login
 import PersonnelLogin from "../views/login/PersonnelLogin";
@@ -244,12 +245,25 @@ const routes = [
         }
       },
       {
-        path: "/tenant/statistic-operation/create",
+        path: "/tenant/statistic-operation-create",
         component: TenantStatisticOperationCreate,
         name: "tenant-statistic-operations-create",
         meta: {
           text: "Create Statistic Operation Formula",
           level: 1,
+          requiredAuth: true,
+          adminAuth: true,
+          sysadminAuth: false,
+          personnelAuth: false
+        }
+      },
+      {
+        path: "/tenant/statistic-operation/:statisticId",
+        component: TenantStatisticOperationDetail,
+        name: "tenant-statistic-operations-detail",
+        meta: {
+          text: "Statistic Operation Formula Detail",
+          level: 2,
           requiredAuth: true,
           adminAuth: true,
           sysadminAuth: false,
