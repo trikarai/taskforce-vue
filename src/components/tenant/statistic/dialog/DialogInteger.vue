@@ -35,6 +35,7 @@
                 type="number"
                 label="Comparison Value"
                 v-model="params.comparisonValue"
+                v-if="!disableComparison"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -76,8 +77,25 @@ export default {
       operand: [
         { value: "=", text: "equal", icon: "mdi-code-equal" },
         { value: ">", text: "greater than", icon: "mdi-code-greater-than" },
-        { value: "<", text: "less than", icon: "mdi-code-less-than" }
+        {
+          value: ">=",
+          text: "greater than or equal",
+          icon: "mdi-code-greater-than-or-equal"
+        },
+        { value: "<", text: "less than", icon: "mdi-code-less-than" },
+        {
+          value: "<=",
+          text: "less than or equal",
+          icon: "mdi-code-less-than-or-equal"
+        },
+        { value: "IS NULL", text: "is null", icon: "mdi-null" },
+        {
+          value: "IS NOT NULL",
+          text: "is not null",
+          icon: "mdi-ellipse-outline mdi-rotate-90 "
+        }
       ],
+      disableComparison: false,
       params: {
         name: this.fieldName,
         assignmentFormId: this.formId,
@@ -90,6 +108,21 @@ export default {
   watch: {
     selected() {
       this.params.comparisonOperand = this.selected.value;
+    },
+    params: {
+      handler() {
+        if (
+          this.params.comparisonOperand === "IS NULL" ||
+          this.params.comparisonOperand === "IS NOT NULL"
+        ) {
+          this.disableComparison = true;
+          this.params.comparisonValue = null;
+        } else {
+          this.disableComparison = false;
+          this.params.comparisonValue = "";
+        }
+      },
+      deep: true
     }
   },
   computed: {},
