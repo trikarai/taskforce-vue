@@ -9,7 +9,11 @@
       <v-col cols="12" lg="12" md="12" xs="12">
         <v-data-table :headers="headers" :items="data.list" item-key="id" :loading="loadingData">
           <template v-slot:item.action="{item}">
-            <v-btn color="accent" :id="item.id">Detail</v-btn>
+            <v-btn
+              color="accent"
+              :id="item.id"
+              :to="{name:'tenant-statistic-operations-detail', params: { statisticId: item.id}}"
+            >Detail</v-btn>
           </template>
         </v-data-table>
       </v-col>

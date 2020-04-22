@@ -49,7 +49,7 @@
         <v-row v-for="field in form.singleSelectFields" :key="field.id">
           <v-col cols="12" lg="10">{{field.name}}</v-col>
           <v-col cols="12" lg="2">
-            <v-btn fab x-small color="primary" disabled>
+            <v-btn fab x-small color="primary" @click="addSelectFormula(field, 'single')">
               <v-icon small>mdi-plus</v-icon>
             </v-btn>
           </v-col>
@@ -58,7 +58,7 @@
         <v-row v-for="field in form.multiSelectFields" :key="field.id">
           <v-col cols="12" lg="10">{{field.name}}</v-col>
           <v-col cols="12" lg="2">
-            <v-btn fab x-small color="primary" disabled>
+            <v-btn fab x-small color="primary" @click="addSelectFormula(field, 'multi')">
               <v-icon small>mdi-plus</v-icon>
             </v-btn>
           </v-col>
@@ -89,12 +89,6 @@
                 </v-col>
                 <v-col cols="12" lg="4">
                   <v-btn color="primary" small @click="dialogFInteger = true">Add Integer Formula</v-btn>
-                </v-col>
-                <v-col cols="12" lg="4">
-                  <v-btn color="primary" small>Add Select Formula</v-btn>
-                </v-col>
-                <v-col cols="12" lg="4">
-                  <v-btn color="primary" small>Add Multi Select Formula</v-btn>
                 </v-col>
               </v-row>
               <v-row>
@@ -153,14 +147,30 @@
                 </v-col>
               </v-row>
               <v-row>
-                <v-col cols="12">
+                <v-col cols="12" lg="12">
                   <v-alert
                     small
                     type="info"
-                    v-if="params.integerFormulas.length == 0"
+                    v-if="params.singleSelectFormulas.length == 0"
                     :value="true"
                   >No Select Formula Added</v-alert>
-                  {{params.singleSelectFormulas}}
+                  <v-row
+                    class="pl-5"
+                    v-for="(data, index) in params.singleSelectFormulas"
+                    :key="index"
+                  >
+                    <v-col cols="12" lg="4">{{data.name}}</v-col>
+                    <v-col cols="12" lg="2">
+                      <v-btn
+                        x-small
+                        color="warning"
+                        icon
+                        @click="params.singleSelectFormulas.splice(index, 1)"
+                      >
+                        <v-icon>mdi-delete</v-icon>
+                      </v-btn>
+                    </v-col>
+                  </v-row>
                 </v-col>
               </v-row>
               <v-row>
@@ -168,10 +178,26 @@
                   <v-alert
                     small
                     type="info"
-                    v-if="params.integerFormulas.length == 0"
+                    v-if="params.multiSelectFormulas.length == 0"
                     :value="true"
                   >No Multi Select Formula Added</v-alert>
-                  {{params.multiSelectFormulas}}
+                  <v-row
+                    class="pl-5"
+                    v-for="(data, index) in params.multiSelectFormulas"
+                    :key="index"
+                  >
+                    <v-col cols="12" lg="4">{{data.name}}</v-col>
+                    <v-col cols="12" lg="2">
+                      <v-btn
+                        x-small
+                        color="warning"
+                        icon
+                        @click="params.multiSelectFormulas.splice(index, 1)"
+                      >
+                        <v-icon>mdi-delete</v-icon>
+                      </v-btn>
+                    </v-col>
+                  </v-row>
                 </v-col>
               </v-row>
             </v-form>
@@ -186,6 +212,14 @@
       v-if="dialogFInteger"
       :dialog.sync="dialogFInteger"
       @submit="addIntegerFormula"
+    />
+    <formula-selection
+      v-if="dialogFSelection"
+      :dialog.sync="dialogFSelection"
+      :formId="formId"
+      :field="field"
+      :type="selectionType"
+      @submit="addSelectionField"
     />
     <field-integer
       v-if="dialogInteger"
@@ -207,6 +241,7 @@ import * as config from "@/config/config";
 import auth from "@/config/auth";
 
 import FormulaInteger from "./dialog/DialogFormulaInteger";
+import FormulaSelection from "./dialog/DialogFormulaSelect";
 import FieldInteger from "./dialog/DialogInteger";
 
 import { validationMixins } from "@/mixins/validationMixins";
@@ -224,6 +259,7 @@ export default {
       formId: "",
       fieldId: "",
       fieldName: "",
+      field: {},
       params: {
         name: "",
         description: "",
@@ -233,13 +269,16 @@ export default {
       },
       dialogInteger: false,
       dialogFInteger: false,
+      dialogFSelection: false,
       integerRadio: "",
       integerSelected: false,
+      selectionType: "single",
       value: ""
     };
   },
   components: {
     FormulaInteger,
+    FormulaSelection,
     FieldInteger
   },
   mounted() {
@@ -285,6 +324,19 @@ export default {
     },
     integerChange() {
       this.integerSelected = true;
+    },
+    addSelectFormula(field, type) {
+      this.selectionType = type;
+      this.dialogFSelection = true;
+      this.field = field;
+    },
+    addSelectionField(params, type) {
+      this.dialogFSelection = false;
+      if (type === "single") {
+        this.params.singleSelectFormulas.push(params);
+      } else {
+        this.params.multiSelectFormulas.push(params);
+      }
     },
     submit() {
       if (this.$refs.form.validate()) {
