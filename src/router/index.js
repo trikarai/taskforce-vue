@@ -37,6 +37,8 @@ import PersonnelSupervisorCanvassSummary from "../components/personnel/asSupervi
 import PersonnelSupervisorCanvassReport from "../components/personnel/asSupervisor/report/CanvassReport";
 // Personnel (SPV) Statistic Operation
 import PersonnelSupervisorStatisticOperation from "../components/personnel/asSupervisor/statistic/Operation";
+import PersonnelSupervisorStatisticOperationDetail from "../components/personnel/asSupervisor/statistic/StatisticDetail";
+import PersonnelSupervisorStatisticOperationReport from "../components/personnel/asSupervisor/statistic/Reports";
 // Personnel (SPV) Assigment Plan
 import PersonnelSupervisorAssigmentPlans from "../components/personnel/asSupervisor/AssignmentPlans";
 import PersonnelSupervisorAssigmentPlanCreate from "../components/personnel/asSupervisor/createAssignmentPlan";
@@ -370,6 +372,32 @@ const routes = [
         meta: {
           text: "Statistic Operation",
           level: 0,
+          requiredAuth: true,
+          adminAuth: false,
+          sysadminAuth: false,
+          personnelAuth: true
+        }
+      },
+      {
+        path: "/personnel/supervisor/statistic-operation/:statisticId",
+        component: PersonnelSupervisorStatisticOperationDetail,
+        name: "personnel-spv-statistic-ops-detail",
+        meta: {
+          text: "Statistic Operation Detail",
+          level: 1,
+          requiredAuth: true,
+          adminAuth: false,
+          sysadminAuth: false,
+          personnelAuth: true
+        }
+      },
+      {
+        path: "/personnel/supervisor/statistic-operation/report/:statisticId",
+        component: PersonnelSupervisorStatisticOperationReport,
+        name: "personnel-spv-statistic-ops-report",
+        meta: {
+          text: "Statistic Operation Report",
+          level: 1,
           requiredAuth: true,
           adminAuth: false,
           sysadminAuth: false,
